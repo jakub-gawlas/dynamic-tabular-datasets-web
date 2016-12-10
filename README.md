@@ -8,3 +8,26 @@
 - [FlowType](https://flowtype.org/)
 - [CSS Modules](https://github.com/css-modules/css-modules)
 - [Create React App](https://github.com/facebookincubator/create-react-app)
+
+## Getting started
+
+#### Clone repository
+```
+git clone https://github.com/jakub-gawlas/dynamic-tabular-datasets-web.git .
+```
+
+#### Install
+```
+yarn
+```
+or
+```
+npm install
+```
+
+#### Run
+```
+npm start
+```
+
+Application started on [localhost:3000](http://localhost:3000).
