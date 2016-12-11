@@ -1,8 +1,9 @@
 // @flow
 import type { Post, NewPost, Filter, Sort } from '../typedefs';
 
-import { observable, computed, action, asMap } from 'mobx';
+import { observable, computed, action, asMap, autorun } from 'mobx';
 import * as api from '../services/api';
+import * as persistence from '../services/persistence';
 import { filterPosts, sortPosts } from './helpers';
 
 class PostsStore {
@@ -27,6 +28,8 @@ class PostsStore {
 
   constructor(){
     this.posts = api.getPosts();
+    this.loadPersistencedData();
+    this.enablePersistence();
   }
 
   @computed
@@ -75,6 +78,22 @@ class PostsStore {
   @action
   setResultTableSort = ( sort: Sort) => {
     this.settingsResultTable.set('sort', sort);
+  }
+
+  @action
+  loadPersistencedData = () => {
+    const postsPerPage = persistence.getPostsPerPage();
+    postsPerPage && this.setPostsPerPage(postsPerPage);
+
+    const sort = persistence.getSort();
+    sort && this.setResultTableSort(sort);
+  }
+
+  enablePersistence = () => {
+    autorun(() => {
+      persistence.savePostsPerPage(this.settingsResultTable.get('postsPerPage'));
+      persistence.saveSort(this.settingsResultTable.get('sort'));
+    });
   }
 
 }
