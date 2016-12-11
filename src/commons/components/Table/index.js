@@ -8,12 +8,6 @@ import {
 } from 'react-bootstrap';
 import styles from './styles.css';
 
-type Props = {
-  headers: Header[],
-  rows: Row[],
-  onClickSort: OnClickSort
-};
-
 type Row = any;
 
 export type Header = {
@@ -23,26 +17,40 @@ export type Header = {
 
 export type OnClickSort = (name: string, type: 'asc' | 'desc') => void;
 
-function renderHeader({ name, label }: Header, onClickSort: OnClickSort){
+type Props = {
+  headers: Header[],
+  rows: Row[],
+  onClickSort: OnClickSort
+};
+
+function renderHeaders(headers: Header[], onClickSort: OnClickSort){
   return(
-    <th>
-      {label}
-      <ButtonGroup bsSize="xsmall" className={styles.header__sort__container}>
-        <Button onClick={() => onClickSort(name, 'asc')}>
-          ↑
-        </Button>
-        <Button onClick={() => onClickSort(name, 'desc')}>
-          ↓
-        </Button>
-      </ButtonGroup>
-    </th>
+    <tr>
+    {headers.map(({ name, label }, idx) => (
+      <th key={idx}>
+        {label}
+        <ButtonGroup bsSize="xsmall" className={styles.header__sort__container}>
+          <Button onClick={() => onClickSort(name, 'asc')}>
+            ↑
+          </Button>
+          <Button onClick={() => onClickSort(name, 'desc')}>
+            ↓
+          </Button>
+        </ButtonGroup>
+      </th>
+    ))}
+    </tr>
   );
 }
 
-function renderRow(headers: Header[], row: Row){
+function renderRow(row: Row, headers: Header[], key: number){
   return(
-    <tr>
-      {headers.map(({ name }) => <td>{row[name]}</td>)}
+    <tr key={key}>
+      {headers.map(({ name }, idx) => (
+        <td key={idx}>
+          {row[name]}
+        </td>
+      ))}
     </tr>
   );
 }
@@ -61,14 +69,12 @@ function GenericTable({headers, rows, onClickSort}: Props){
   return(
     <Table striped bordered condensed>
       <thead>
-        <tr>
-          {headers.map((header) => renderHeader(header, onClickSort))}
-        </tr>
+        {renderHeaders(headers, onClickSort)}
       </thead>
       <tbody>
         {
           rows.length > 0 ?
-            rows.map((row) => renderRow(headers, row))
+            rows.map((row, idx) => renderRow(row, headers, idx))
           :
             renderInfoNoItems()
         }

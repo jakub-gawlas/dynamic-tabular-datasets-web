@@ -15,14 +15,19 @@ type Props = {
 
 const ITEMS_PER_PAGE = [5, 10, 15, 25];
 
-function renderButton(value: number, isActive: boolean, onClick: (value: number) => void){
+function renderButtons(currentValue: number, onClick: (value: number) => void){
   return(
-    <Button 
-      active={isActive}
-      onClick={() => onClick(value)}
-    >
-      {value}
-    </Button>
+    <ButtonGroup>
+    {ITEMS_PER_PAGE.map((value, idx) => (
+      <Button 
+        active={currentValue === value}
+        onClick={() => onClick(value)}
+        key={idx}
+      >
+        {value}
+      </Button>
+    ))}
+    </ButtonGroup>
   );
 }
 
@@ -33,12 +38,7 @@ function NumberItemsSelector({ currentValue, onSelect }: Props){
         Posts per page
       </span>
       <ButtonToolbar>
-        <ButtonGroup>
-          {ITEMS_PER_PAGE.map((value) => {
-            const isActive = value === currentValue;
-            return renderButton(value, isActive, onSelect);
-          })}
-        </ButtonGroup>
+        {renderButtons(currentValue, onSelect)}
       </ButtonToolbar>
     </div>
   );

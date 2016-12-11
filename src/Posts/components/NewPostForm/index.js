@@ -2,7 +2,7 @@
 import type { NewPost } from '../../typedefs';
 import type { Field } from '../../../commons/components/Form'; 
 
-import React, { Component } from 'react';
+import React from 'react';
 import Form from '../../../commons/components/Form';
 import styles from './styles.css';
 

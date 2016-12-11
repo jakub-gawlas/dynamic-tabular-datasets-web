@@ -10,7 +10,7 @@ export function savePostsPerPage(value: number){
 
 export function getPostsPerPage(): number | null {
   const postsPerPage = localStorage.getItem(KEY_POSTS_PER_PAGE);
-  return postsPerPage ? parseInt(postsPerPage) : null;
+  return postsPerPage ? parseInt(postsPerPage, 10) : null;
 }
 
 export function saveSort(value: Sort){

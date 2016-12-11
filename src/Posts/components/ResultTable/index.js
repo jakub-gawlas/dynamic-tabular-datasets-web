@@ -1,5 +1,5 @@
 // @flow
-import type { Post, Sort } from '../../typedefs';
+import type { Post } from '../../typedefs';
 import type { Header, OnClickSort } from '../../../commons/components/Table';
 
 import React from 'react';
