@@ -14,10 +14,12 @@ class ManagePanel extends Component {
       resultPosts,
       numberOfPages,
       currentPage,
+      postsPerPage,
       setCurrentPage,
-      setResultTableSort
+      setResultTableSort,
+      setPostsPerPage
     } = PostsStore;
-
+    
     return(
       <div className={styles.container}>
         <ResultTable 
@@ -26,6 +28,8 @@ class ManagePanel extends Component {
           currentPage={currentPage} 
           onSelectPage={setCurrentPage}
           onClickSort={(by, type) => setResultTableSort({ by, type })}
+          itemsPerPage={postsPerPage}
+          onSelectItemsPerPage={setPostsPerPage}
         />
         <NewPostForm onSubmit={PostsStore.addPost} />
       </div>

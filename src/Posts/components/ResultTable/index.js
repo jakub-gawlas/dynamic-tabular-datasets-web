@@ -4,7 +4,7 @@ import type { Header, OnClickSort } from '../../../commons/components/Table';
 
 import React from 'react';
 import Table from '../../../commons/components/Table';
-import { Pagination } from 'react-bootstrap';
+import Pager from './Pager';
 
 const tableHeaders: Header[] = [
   {
@@ -38,10 +38,12 @@ type Props = {
   numberOfPages: number,
   currentPage: number,
   onSelectPage: (number) => void,
-  onClickSort: OnClickSort
+  onClickSort: OnClickSort,
+  itemsPerPage: number,
+  onSelectItemsPerPage: (value: number) => void
 };
 
-function ResultTable({ posts, numberOfPages, currentPage, onSelectPage, onClickSort }: Props){
+function ResultTable({ posts, numberOfPages, currentPage, onSelectPage, onClickSort, itemsPerPage, onSelectItemsPerPage }: Props){
   return (
     <div>
       <Table 
@@ -49,11 +51,12 @@ function ResultTable({ posts, numberOfPages, currentPage, onSelectPage, onClickS
         rows={posts}
         onClickSort={onClickSort}
       />
-      <Pagination 
-        bsSize="medium"
-        items={numberOfPages}
-        activePage={currentPage}
-        onSelect={onSelectPage}
+      <Pager 
+        numberOfPages={numberOfPages}
+        currentPage={currentPage}
+        onSelectPage={onSelectPage}
+        itemsPerPage={itemsPerPage}
+        onSelectItemsPerPage={onSelectItemsPerPage}
       />
     </div>
   );
