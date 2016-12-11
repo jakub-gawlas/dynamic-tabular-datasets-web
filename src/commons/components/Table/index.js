@@ -27,7 +27,7 @@ function renderHeaders(headers: Header[], onClickSort: OnClickSort){
   return(
     <tr>
     {headers.map(({ name, label }, idx) => (
-      <th key={idx}>
+      <th className={styles['text-center']} key={idx}>
         {label}
         <ButtonGroup bsSize="xsmall" className={styles.header__sort__container}>
           <Button onClick={() => onClickSort(name, 'asc')}>
@@ -47,7 +47,7 @@ function renderRow(row: Row, headers: Header[], key: number){
   return(
     <tr key={key}>
       {headers.map(({ name }, idx) => (
-        <td key={idx}>
+        <td className={styles['text-center']} key={idx}>
           {row[name]}
         </td>
       ))}
@@ -58,7 +58,7 @@ function renderRow(row: Row, headers: Header[], key: number){
 function renderInfoNoItems(){
   return(
     <tr>
-      <td className={styles['row__td--info']} colSpan="100">
+      <td className={styles['text-center']} colSpan="100">
         No items
       </td>
     </tr>
