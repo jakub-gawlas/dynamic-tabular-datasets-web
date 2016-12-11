@@ -1,37 +1,54 @@
 // @flow
-import type { Post } from '../../typedefs';
+import type { Post, Sort } from '../../typedefs';
+import type { Header } from '../../../commons/components/Table';
 
 import React from 'react';
-import { Table, Pagination } from 'react-bootstrap';
+import Table from '../../../commons/components/Table';
+import { Pagination } from 'react-bootstrap';
+
+const tableHeaders: Header[] = [
+  {
+    name: 'id',
+    label: 'ID'
+  },
+  {
+    name: 'username',
+    label: 'Author'
+  },
+  {
+    name: 'title',
+    label: 'Post title'
+  },
+  {
+    name: 'views',
+    label: 'Views'
+  },
+  {
+    name: 'likes',
+    label: 'Likes'
+  },
+  {
+    name: 'createdAt',
+    label: 'Created at'
+  }
+];
 
 type Props = {
   posts: Post[],
   numberOfPages: number,
   currentPage: number,
-  onSelectPage: (number) => void
-}
+  onSelectPage: (number) => void,
+  onClickSort: (sort: Sort) => void
+};
 
-function ResultTable({ posts, numberOfPages, currentPage, onSelectPage }: Props){
+function ResultTable({ posts, numberOfPages, currentPage, onSelectPage, onClickSort }: Props){
   return (
     <div>
-      <Table striped bordered condensed>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Username</th>
-            <th>Post title</th>
-          </tr>
-        </thead>
-        <tbody>
-          {posts.map(({ id, username, title }) => (
-            <tr>
-              <td>{id}</td>
-              <td>{username}</td>
-              <td>{title}</td>
-            </tr>
-          ))}
-        </tbody>
-      </Table>
+      <Table 
+        headers={tableHeaders}
+        rows={posts}
+        onClickSort={(name, type) => onClickSort({ type, by: name })}
+      />
       <Pagination 
         bsSize="medium"
         items={numberOfPages}

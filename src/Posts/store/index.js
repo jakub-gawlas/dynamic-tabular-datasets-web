@@ -1,8 +1,9 @@
 // @flow
-import type { Post, NewPost, SettingsResultTable } from '../typedefs';
+import type { Post, NewPost, Filter, Sort } from '../typedefs';
 
 import { observable, computed, action, asMap } from 'mobx';
 import * as api from '../services/api';
+import { filterPosts, sortPosts } from './helpers';
 
 class PostsStore {
 
@@ -19,8 +20,8 @@ class PostsStore {
       username: ''
     },
     sort: {
-      by: '',
-      type: ''
+      by: 'id',
+      type: 'asc'
     }
   })
 
@@ -29,16 +30,24 @@ class PostsStore {
   }
 
   @computed
-  get resultPosts(): Post[]{
+  get filteredAndSortedPosts(): Post[] {
+    const filteredPosts = filterPosts(this.posts, this.settingsResultTable.get('filter'));
+    const sortedPosts = sortPosts(filteredPosts, this.settingsResultTable.get('sort'));
+
+    return sortedPosts;
+  }
+
+  @computed
+  get resultPosts(): Post[] {
     const postsPerPage = this.settingsResultTable.get('postsPerPage');
     const startIndex = (this.currentPage - 1) * postsPerPage;
     const endIndex = startIndex + postsPerPage;
-    return this.posts.slice(startIndex, endIndex);
+    return this.filteredAndSortedPosts.slice(startIndex, endIndex);
   }
 
   @computed
   get numberOfPages(): number {
-    return Math.ceil(this.posts.length / this.settingsResultTable.get('postsPerPage'));
+    return Math.ceil(this.filteredAndSortedPosts.length / this.settingsResultTable.get('postsPerPage'));
   }
 
   @action
@@ -50,7 +59,17 @@ class PostsStore {
   @action
   setCurrentPage = (page: number) => {
     this.currentPage = page;
-  } 
+  }
+
+  @action
+  setResultTableFilter = (filter: Filter) => {
+    this.settingsResultTable.set('filter', filter);
+  }
+
+  @action
+  setResultTableSort = ( sort: Sort) => {
+    this.settingsResultTable.set('sort', sort);
+  }
 
 }
 
