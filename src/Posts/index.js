@@ -3,15 +3,7 @@
 import React, { Component} from 'react';
 import { observer } from 'mobx-react';
 import PostsStore from './store';
-
-const newPost = {
-  id: 4,
-  username: 'Andrzej_III',
-  title: 'Yo yo yo',
-  views: 100,
-  likes: 10,
-  createdAt: '2015-01-20'
-};
+import NewPostForm from './components/NewPostForm';
 
 @observer
 class Posts extends Component {
@@ -19,9 +11,9 @@ class Posts extends Component {
     return(
       <div>
         <ul>
-          {PostsStore.sortedPosts.map(({ title }) => <li>{title}</li>)}
+          {PostsStore.sortedPosts.map(({ title }, idx) => <li key={idx}>{title}</li>)}
         </ul>
-        <button onClick={() => PostsStore.addPost(newPost)}>ADD</button>
+        <NewPostForm onSubmit={PostsStore.addPost} />
       </div>
     );
   }

@@ -8,3 +8,8 @@ export type Post = {
   likes: number,
   createdAt: string
 };
+
+export type NewPost = {
+  username: string,
+  title: string
+}
