@@ -50,17 +50,19 @@ function ResultTable({ posts, numberOfPages, currentPage, onSelectPage, onClickS
         rows={posts}
         onClickSort={onClickSort}
       />
-      <div className={styles.pagination__container}>
-        <span className={styles.pagination__title}>
-          Page
-        </span>
-        <Pagination 
-            bsSize="medium"
-            items={numberOfPages}
-            activePage={currentPage}
-            onSelect={onSelectPage}
-        />
-      </div>
+      {numberOfPages > 0 &&
+        <div className={styles.pagination__container}>
+          <span className={styles.pagination__title}>
+            Page
+          </span>
+          <Pagination 
+              bsSize="medium"
+              items={numberOfPages}
+              activePage={currentPage}
+              onSelect={onSelectPage}
+          />
+        </div>
+      }
     </div>
   );
 }

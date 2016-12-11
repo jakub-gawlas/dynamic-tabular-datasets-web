@@ -1,3 +1,7 @@
 .header__sort__container {
   padding: 1rem;
 }
+
+.row__td--info {
+  text-align: center;
+}

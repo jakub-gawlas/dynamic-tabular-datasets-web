@@ -1,7 +1,11 @@
 // @flow
 
 import React from 'react';
-import { Table } from 'react-bootstrap';
+import {
+  ButtonGroup,
+  Button, 
+  Table
+} from 'react-bootstrap';
 import styles from './styles.css';
 
 type Props = {
@@ -23,14 +27,14 @@ function renderHeader({ name, label }: Header, onClickSort: OnClickSort){
   return(
     <th>
       {label}
-      <span className={styles.header__sort__container}>
-        <button onClick={() => onClickSort(name, 'asc')}>
-          +
-        </button>
-        <button onClick={() => onClickSort(name, 'desc')}>
-          -
-        </button>
-      </span>
+      <ButtonGroup bsSize="xsmall" className={styles.header__sort__container}>
+        <Button onClick={() => onClickSort(name, 'asc')}>
+          ↑
+        </Button>
+        <Button onClick={() => onClickSort(name, 'desc')}>
+          ↓
+        </Button>
+      </ButtonGroup>
     </th>
   );
 }
@@ -39,6 +43,16 @@ function renderRow(headers: Header[], row: Row){
   return(
     <tr>
       {headers.map(({ name }) => <td>{row[name]}</td>)}
+    </tr>
+  );
+}
+
+function renderInfoNoItems(){
+  return(
+    <tr>
+      <td className={styles['row__td--info']} colSpan="100">
+        No items
+      </td>
     </tr>
   );
 }
@@ -52,7 +66,12 @@ function GenericTable({headers, rows, onClickSort}: Props){
         </tr>
       </thead>
       <tbody>
-        {rows.map((row) => renderRow(headers, row))}
+        {
+          rows.length > 0 ?
+            rows.map((row) => renderRow(headers, row))
+          :
+            renderInfoNoItems()
+        }
       </tbody>
     </Table>
   );

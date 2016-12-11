@@ -23,7 +23,8 @@ function Filter({ usernameValue, onChangeUsername }: Props){
   ];
   return(
     <Form
-      hideSubmitButton fields={FILTER_FILEDS}
+      hideSubmitButton 
+      fields={FILTER_FILEDS}
       className={styles.container} 
     />
   );
