@@ -3,6 +3,7 @@ import type { Field } from '../../../commons/components/Form';
 
 import React from 'react';
 import Form from '../../../commons/components/Form';
+import styles from './styles.css';
 
 type Props = {
   usernameValue: string,
@@ -21,7 +22,10 @@ function Filter({ usernameValue, onChangeUsername }: Props){
     }
   ];
   return(
-    <Form hideSubmitButton fields={FILTER_FILEDS} />
+    <Form
+      hideSubmitButton fields={FILTER_FILEDS}
+      className={styles.container} 
+    />
   );
 }
 

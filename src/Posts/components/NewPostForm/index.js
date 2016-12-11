@@ -4,6 +4,7 @@ import type { Field } from '../../../commons/components/Form';
 
 import React, { Component } from 'react';
 import Form from '../../../commons/components/Form';
+import styles from './styles.css';
 
 type Props = {
   onSubmit: (newPost: NewPost) => void
@@ -30,6 +31,7 @@ function NewPostForm({ onSubmit }: Props){
       textSubmitButton="Add post"
       fields={FORM_FIELDS}
       onSubmit={onSubmit}
+      className={styles.container}
     />
   );
 }

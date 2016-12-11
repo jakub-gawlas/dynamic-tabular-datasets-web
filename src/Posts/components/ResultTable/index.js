@@ -3,17 +3,16 @@ import type { Post, Sort } from '../../typedefs';
 import type { Header, OnClickSort } from '../../../commons/components/Table';
 
 import React from 'react';
+import { Pagination } from 'react-bootstrap';
 import Table from '../../../commons/components/Table';
-import Pager from './Pager';
+import styles from './styles.css';
 
 type Props = {
   posts: Post[],
   numberOfPages: number,
   currentPage: number,
   onSelectPage: (number) => void,
-  onClickSort: OnClickSort,
-  itemsPerPage: number,
-  onSelectItemsPerPage: (value: number) => void
+  onClickSort: OnClickSort
 };
 
 const TABLE_HEADERS: Header[] = [
@@ -51,13 +50,17 @@ function ResultTable({ posts, numberOfPages, currentPage, onSelectPage, onClickS
         rows={posts}
         onClickSort={onClickSort}
       />
-      <Pager 
-        numberOfPages={numberOfPages}
-        currentPage={currentPage}
-        onSelectPage={onSelectPage}
-        itemsPerPage={itemsPerPage}
-        onSelectItemsPerPage={onSelectItemsPerPage}
-      />
+      <div className={styles.pagination__container}>
+        <span className={styles.pagination__title}>
+          Page
+        </span>
+        <Pagination 
+            bsSize="medium"
+            items={numberOfPages}
+            activePage={currentPage}
+            onSelect={onSelectPage}
+        />
+      </div>
     </div>
   );
 }

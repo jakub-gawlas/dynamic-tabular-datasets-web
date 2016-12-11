@@ -23,7 +23,8 @@ type Props = {
   textSubmitButton?: string,
   hideSubmitButton?: boolean,
   fields: Field[],
-  onSubmit?: (fieldsValues: any) => void
+  onSubmit?: (fieldsValues: any) => void,
+  className?: string
 };
 
 class GenericForm extends Component {
@@ -80,13 +81,13 @@ class GenericForm extends Component {
       <Button type="submit" onClick={this.onClickButton}>
         {textSubmitButton}
       </Button>
-    )
+    );
   }
 
   render(){
-    const { fields, hideSubmitButton } = this.props;
+    const { fields, hideSubmitButton, className } = this.props;
     return(
-      <Form inline>
+      <Form inline className={className}>
         {fields.map(this.renderField)}
         {!hideSubmitButton && this.renderSubmitButton()}
       </Form>

@@ -1,7 +1,7 @@
-.field__container {
-  padding: 1rem;
-}
-
-.field__input {
-  margin-left: 1rem;
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f9f9f9;
+  padding: 2rem;
 }

@@ -4,6 +4,14 @@ import React from 'react';
 import { Table } from 'react-bootstrap';
 import styles from './styles.css';
 
+type Props = {
+  headers: Header[],
+  rows: Row[],
+  onClickSort: OnClickSort
+};
+
+type Row = any;
+
 export type Header = {
   name: string,
   label: string,
@@ -11,22 +19,18 @@ export type Header = {
 
 export type OnClickSort = (name: string, type: 'asc' | 'desc') => void;
 
-type Props = {
-  headers: Header[],
-  rows: any[],
-  onClickSort: OnClickSort
-};
-
 function renderHeader({ name, label }: Header, onClickSort: OnClickSort){
   return(
     <th>
       {label}
-      <button onClick={() => onClickSort(name, 'asc')}>
-        +
-      </button>
-      <button onClick={() => onClickSort(name, 'desc')}>
-        -
-      </button>
+      <span className={styles.header__sort__container}>
+        <button onClick={() => onClickSort(name, 'asc')}>
+          +
+        </button>
+        <button onClick={() => onClickSort(name, 'desc')}>
+          -
+        </button>
+      </span>
     </th>
   );
 }

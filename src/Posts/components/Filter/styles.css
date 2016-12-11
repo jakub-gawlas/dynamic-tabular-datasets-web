@@ -1,11 +1,5 @@
 .container {
-  max-width: 960px;
-}
-
-.filter__container {
   display: flex;
-  flex-wrap: nowrap;
   justify-content: space-around;
   align-items: center;
-  margin: 1rem;
 }
