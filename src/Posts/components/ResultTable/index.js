@@ -6,7 +6,17 @@ import React from 'react';
 import Table from '../../../commons/components/Table';
 import Pager from './Pager';
 
-const tableHeaders: Header[] = [
+type Props = {
+  posts: Post[],
+  numberOfPages: number,
+  currentPage: number,
+  onSelectPage: (number) => void,
+  onClickSort: OnClickSort,
+  itemsPerPage: number,
+  onSelectItemsPerPage: (value: number) => void
+};
+
+const TABLE_HEADERS: Header[] = [
   {
     name: 'id',
     label: 'ID'
@@ -33,21 +43,11 @@ const tableHeaders: Header[] = [
   }
 ];
 
-type Props = {
-  posts: Post[],
-  numberOfPages: number,
-  currentPage: number,
-  onSelectPage: (number) => void,
-  onClickSort: OnClickSort,
-  itemsPerPage: number,
-  onSelectItemsPerPage: (value: number) => void
-};
-
 function ResultTable({ posts, numberOfPages, currentPage, onSelectPage, onClickSort, itemsPerPage, onSelectItemsPerPage }: Props){
   return (
     <div>
       <Table 
-        headers={tableHeaders}
+        headers={TABLE_HEADERS}
         rows={posts}
         onClickSort={onClickSort}
       />

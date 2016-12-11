@@ -5,7 +5,11 @@ import type { Field } from '../../../commons/components/Form';
 import React, { Component } from 'react';
 import Form from '../../../commons/components/Form';
 
-const formFields: Field[] = [
+type Props = {
+  onSubmit: (newPost: NewPost) => void
+};
+
+const FORM_FIELDS: Field[] = [
   {
     name: 'title',
     label: 'Title',
@@ -20,15 +24,11 @@ const formFields: Field[] = [
   }
 ];
 
-type Props = {
-  onSubmit: (newPost: NewPost) => void
-};
-
 function NewPostForm({ onSubmit }: Props){
   return(
     <Form 
       textSubmitButton="Add post"
-      fields={formFields}
+      fields={FORM_FIELDS}
       onSubmit={onSubmit}
     />
   );
