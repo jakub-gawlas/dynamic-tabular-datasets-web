@@ -9,7 +9,7 @@ export type Header = {
   label: string,
 };
 
-type OnClickSort = (name: string, type: 'asc' | 'desc') => void;
+export type OnClickSort = (name: string, type: 'asc' | 'desc') => void;
 
 type Props = {
   headers: Header[],

@@ -25,7 +25,7 @@ class ManagePanel extends Component {
           numberOfPages={numberOfPages}
           currentPage={currentPage} 
           onSelectPage={setCurrentPage}
-          onClickSort={setResultTableSort}
+          onClickSort={(by, type) => setResultTableSort({ by, type })}
         />
         <NewPostForm onSubmit={PostsStore.addPost} />
       </div>

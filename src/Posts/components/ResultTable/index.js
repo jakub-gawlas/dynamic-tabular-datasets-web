@@ -1,6 +1,6 @@
 // @flow
 import type { Post, Sort } from '../../typedefs';
-import type { Header } from '../../../commons/components/Table';
+import type { Header, OnClickSort } from '../../../commons/components/Table';
 
 import React from 'react';
 import Table from '../../../commons/components/Table';
@@ -38,7 +38,7 @@ type Props = {
   numberOfPages: number,
   currentPage: number,
   onSelectPage: (number) => void,
-  onClickSort: (sort: Sort) => void
+  onClickSort: OnClickSort
 };
 
 function ResultTable({ posts, numberOfPages, currentPage, onSelectPage, onClickSort }: Props){
@@ -47,7 +47,7 @@ function ResultTable({ posts, numberOfPages, currentPage, onSelectPage, onClickS
       <Table 
         headers={tableHeaders}
         rows={posts}
-        onClickSort={(name, type) => onClickSort({ type, by: name })}
+        onClickSort={onClickSort}
       />
       <Pagination 
         bsSize="medium"
