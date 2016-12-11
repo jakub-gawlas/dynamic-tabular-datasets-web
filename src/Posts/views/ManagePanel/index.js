@@ -3,6 +3,7 @@
 import React, { Component } from 'react';
 import { observer } from 'mobx-react';
 import PostsStore from '../../store';
+import Filter from '../../components/Filter';
 import ResultTable from '../../components/ResultTable';
 import NewPostForm from '../../components/NewPostForm';
 import styles from './styles.css';
@@ -14,14 +15,21 @@ class ManagePanel extends Component {
       resultPosts,
       numberOfPages,
       currentPage,
-      postsPerPage,
       setCurrentPage,
       setResultTableSort,
-      setPostsPerPage
+      setResultTableFilter,
+      setPostsPerPage,
+      settingsResultTable
     } = PostsStore;
+
+    const { postsPerPage, filter } = settingsResultTable.toJS();
     
     return(
       <div className={styles.container}>
+        <Filter 
+          usernameValue={filter.username}
+          onChangeUsername={(value) => setResultTableFilter({ username: value })}
+        />
         <ResultTable 
           posts={resultPosts}
           numberOfPages={numberOfPages}

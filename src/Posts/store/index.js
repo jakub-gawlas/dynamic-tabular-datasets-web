@@ -50,20 +50,16 @@ class PostsStore {
     return Math.ceil(this.filteredAndSortedPosts.length / this.settingsResultTable.get('postsPerPage'));
   }
 
-  @computed
-  get postsPerPage(): number {
-    return this.settingsResultTable.get('postsPerPage');
-  }
-
-  @action
-  setPostsPerPage = (value: number) => {
-    this.settingsResultTable.set('postsPerPage', value);
-  }
-
   @action
   addPost = (post: NewPost) => {
     const newPost = api.addPost(post);
     this.posts = [...this.posts, newPost];
+  }
+
+  @action
+  setPostsPerPage = (value: number) => {
+    this.currentPage = 1;
+    this.settingsResultTable.set('postsPerPage', value);
   }
 
   @action

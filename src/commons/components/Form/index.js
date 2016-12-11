@@ -14,19 +14,34 @@ export type Field = {
   name: string,
   label: string,
   type: string,
-  placeholder: string
+  placeholder?: string,
+  value?: string | number,
+  onChange?: (value: string) => void
 };
 
 type Props = {
-  textSubmitButton: string,
+  textSubmitButton?: string,
+  hideSubmitButton?: boolean,
   fields: Field[],
-  onSubmit: (fieldsValues: any) => void
+  onSubmit?: (fieldsValues: any) => void
 };
 
 class GenericForm extends Component {
   props: Props
 
+  static defaultProps = {
+    hideSubmitButton: false
+  }
+
   refsFields = {}
+
+  onClickButton = (event: any) => {
+    event.preventDefault();
+
+    const { onSubmit } = this.props;
+    onSubmit && onSubmit(this.getFieldsValues());
+    this.clearFields();
+  }
 
   getFieldsValues = () => {
     const { fields } = this.props;
@@ -41,15 +56,7 @@ class GenericForm extends Component {
     fields.forEach(({ name }) => this.refsFields[name].value = '');
   }
 
-  onClickButton = (event: any) => {
-    event.preventDefault();
-
-    const { onSubmit } = this.props;
-    onSubmit(this.getFieldsValues());
-    this.clearFields();
-  }
-
-  renderField = ({ name, label, type, placeholder }: Field, idx: number) => {
+  renderField = ({ name, label, type, placeholder, value, onChange }: Field, idx: number) => {
     return(
       <FormGroup className={styles.field__container} key={idx}>
         <ControlLabel>
@@ -60,19 +67,28 @@ class GenericForm extends Component {
           placeholder={placeholder}
           inputRef={(ref) => this.refsFields[name] = ref}
           className={styles.field__input}
+          onChange={(e) => onChange && onChange(e.target.value)}
+          value={value}
         />
       </FormGroup>
     );
   }
 
+  renderSubmitButton(){
+    const { textSubmitButton } = this.props;
+    return (
+      <Button type="submit" onClick={this.onClickButton}>
+        {textSubmitButton}
+      </Button>
+    )
+  }
+
   render(){
-    const { textSubmitButton, fields } = this.props;
+    const { fields, hideSubmitButton } = this.props;
     return(
       <Form inline>
         {fields.map(this.renderField)}
-        <Button type="submit" onClick={this.onClickButton}>
-          {textSubmitButton}
-        </Button>
+        {!hideSubmitButton && this.renderSubmitButton()}
       </Form>
     );
   }

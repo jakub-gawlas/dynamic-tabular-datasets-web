@@ -11,16 +11,16 @@ type Props = {
 
 const FORM_FIELDS: Field[] = [
   {
+    name: 'username',
+    label: 'Author',
+    type: 'text',
+    placeholder: 'Post author'
+  },
+  {
     name: 'title',
     label: 'Title',
     type: 'text',
     placeholder: 'Post title'
-  },
-  {
-    name: 'username',
-    label: 'Username',
-    type: 'text',
-    placeholder: 'Post author'
   }
 ];
 
