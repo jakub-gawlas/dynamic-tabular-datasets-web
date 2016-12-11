@@ -1,15 +1,13 @@
 // @flow
 
 import React from 'react';
-import Posts from '../../Posts';
+import Posts from '../../../Posts';
 import styles from './styles.css';
 
 function Main(){
   return(
     <div className={styles.container}>
-      <div className={styles.table}>
-        <Posts />
-      </div>
+      <Posts />
     </div>
   );
 }
