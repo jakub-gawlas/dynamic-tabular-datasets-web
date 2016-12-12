@@ -1,10 +1,18 @@
 // @flow
 import type { Post, Sort } from '../../typedefs';
 
+/**
+ * Sort posts by key passed in `by`,
+ * if `type` is `desc` then descending else ascending 
+ */
 function sortPosts(posts: Post[], { by, type }: Sort){
   return [...posts].sort(_compareBy(by, type));
 }
 
+/**
+ * Method pass as param to Array.sort()
+ * Compare passed post objects by `key`
+ */
 function _compareBy(key: string, type: 'asc' | 'desc'): (Post, Post) => number {
   return (a: Post, b: Post): number => {
     const typeValue = typeof a[key];

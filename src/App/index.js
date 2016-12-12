@@ -1,6 +1,10 @@
 // @flow
 
 import React from 'react';
+
+/**
+ * Components
+ */
 import MainView from './views/Main';
 
 

@@ -2,14 +2,22 @@
 import type { Field } from '../../../commons/components/Form'; 
 
 import React from 'react';
+
+/** Stores */
 import PostsStore from '../../store';
-import Form from '../../../commons/components/Form';
+
+/** Components */
+import Form from '../../../Commons/components/Form';
+
+/** Styles */
 import styles from './styles.css';
 
+/** Types */
 type Props = {
   className?: string
 };
 
+/** Fields of form */
 const FORM_FIELDS: Field[] = [
   {
     name: 'username',
@@ -25,6 +33,9 @@ const FORM_FIELDS: Field[] = [
   }
 ];
 
+/**
+ * NewPostForm component
+ */
 function NewPostForm({ className }: Props){
   return(
     <Form 

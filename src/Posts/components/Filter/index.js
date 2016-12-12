@@ -3,13 +3,21 @@ import type { Field } from '../../../commons/components/Form';
 
 import React, { Component } from 'react';
 import { observer } from 'mobx-react';
-import PostsStore from '../../store';
-import Form from '../../../commons/components/Form';
 
+/** Stores */
+import PostsStore from '../../store';
+
+/** Styles */
+import Form from '../../../Commons/components/Form';
+
+/** Types */
 type Props = {
   className?: string
 };
 
+/** 
+ * Filter component 
+ */
 @observer
 class Filter extends Component {
   props: Props

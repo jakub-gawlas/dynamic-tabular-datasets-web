@@ -1,13 +1,18 @@
 // @flow
 
 import React from 'react';
+
+/** Components */
 import {
   ButtonGroup,
   Button, 
   Table as BootstrapTable
 } from 'react-bootstrap';
+
+/** Styles */
 import styles from './styles.css';
 
+/** Types */
 export type Row = any;
 
 export type Header = {
@@ -23,6 +28,9 @@ type Props = {
   onClickSort: OnClickSort
 };
 
+/** 
+ * Table component
+ */
 function renderHeaders(headers: Header[], onClickSort: OnClickSort){
   return(
     <tr>

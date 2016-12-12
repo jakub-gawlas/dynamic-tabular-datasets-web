@@ -1,6 +1,8 @@
 // @flow
 
 import React, { Component } from 'react';
+
+/** Components */
 import { 
   Form as BootstrapForm,
   FormGroup,
@@ -8,8 +10,11 @@ import {
   FormControl,
   Button
 } from 'react-bootstrap';
+
+/** Styles */
 import styles from './styles.css';
 
+/** Types */
 export type Field = {
   name: string,
   label: string,
@@ -27,6 +32,9 @@ type Props = {
   className?: string
 };
 
+/**
+ * Form component
+ */
 class Form extends Component {
   props: Props
 

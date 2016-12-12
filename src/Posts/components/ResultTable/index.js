@@ -3,14 +3,20 @@ import type { Header } from '../../../commons/components/Table';
 
 import React, { Component } from 'react';
 import { observer } from 'mobx-react';
+
+/** Stores */
 import PostsStore from '../../store';
-import Table from '../../../commons/components/Table';
+
+/** Components */
+import Table from '../../../Commons/components/Table';
 import Pager from './Pager';
 
+/** Types */
 type Props = {
   className?: string
 };
 
+/** Headers of table */
 const TABLE_HEADERS: Header[] = [
   {
     name: 'id',
@@ -38,6 +44,9 @@ const TABLE_HEADERS: Header[] = [
   }
 ];
 
+/**
+ * ResultTable component
+ */
 @observer
 class ResultTable extends Component {
   props: Props

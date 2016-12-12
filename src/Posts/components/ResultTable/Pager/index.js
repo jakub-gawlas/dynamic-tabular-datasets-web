@@ -1,9 +1,14 @@
 // @flow
 
 import React from 'react';
+
+/** Components */
 import { Pagination } from 'react-bootstrap';
+
+/** Styles */
 import styles from './styles.css';
 
+/** Types */
 type Props = {
   title: string,
   numberOfPages: number,
@@ -12,9 +17,12 @@ type Props = {
   className?: string
 }
 
+/** 
+ * Pager component 
+ */
 function Pager({ title, numberOfPages, currentPage, onSelect, className }: Props){
 
-  /* Minimal value number of pages passed to Pagination is 1 */
+  /** Minimal value number of pages passed to Pagination is 1 */
   const items = Math.max(1, numberOfPages);
 
   return(

@@ -1,11 +1,21 @@
 // @flow
 import type { Post, NewPost, Filter, Sort } from '../typedefs';
 
-import { observable, computed, action, asMap, autorun } from 'mobx';
+import { 
+  observable, 
+  computed, 
+  action, 
+  asMap,
+  autorun 
+} from 'mobx';
+
+import { filterPosts, sortPosts } from './helpers';
 import * as api from '../services/api';
 import * as persistence from '../services/persistence';
-import { filterPosts, sortPosts } from './helpers';
 
+/**
+ * Store posts and properties used to manage dataset of posts
+ */
 class PostsStore {
 
   @observable
@@ -32,6 +42,11 @@ class PostsStore {
     this.enablePersistence();
   }
 
+  /**
+   * Posts
+   */
+
+  /** Posts after filter and sort */
   @computed
   get filteredAndSortedPosts(): Post[] {
     const filteredPosts = filterPosts(this.posts, this.settingsResultTable.get('filter'));
@@ -40,6 +55,7 @@ class PostsStore {
     return sortedPosts;
   }
 
+  /** Posts after filter, sort and slice to proper subarray */
   @computed
   get resultPosts(): Post[] {
     const postsPerPage = this.settingsResultTable.get('postsPerPage');
@@ -48,26 +64,36 @@ class PostsStore {
     return this.filteredAndSortedPosts.slice(startIndex, endIndex);
   }
 
+  /** Number subarray of sliced posts   */
   @computed
   get numberOfPages(): number {
     return Math.ceil(this.filteredAndSortedPosts.length / this.settingsResultTable.get('postsPerPage'));
   }
 
+  /** Add new post to store */
   @action
   addPost = (post: NewPost) => {
     const newPost = api.addPost(post);
     this.posts = [...this.posts, newPost];
   }
 
-  @action
-  setPostsPerPage = (value: number) => {
-    this.currentPage = 1;
-    this.settingsResultTable.set('postsPerPage', value);
-  }
+  /**
+   * Current page
+   */
 
   @action
   setCurrentPage = (page: number) => {
     this.currentPage = page;
+  }
+
+  /**
+   * Settings result table
+   */
+
+  @action
+  setPostsPerPage = (value: number) => {
+    this.currentPage = 1;
+    this.settingsResultTable.set('postsPerPage', value);
   }
 
   @action
@@ -80,6 +106,11 @@ class PostsStore {
     this.settingsResultTable.set('sort', sort);
   }
 
+  /**
+   * Persistence data
+   */
+
+  /** Load data saved on local storage */
   @action
   loadPersistencedData = () => {
     const postsPerPage = persistence.getPostsPerPage();
@@ -89,6 +120,7 @@ class PostsStore {
     sort && this.setResultTableSort(sort);
   }
 
+  /** Automatically save data on local storage */
   enablePersistence = () => {
     const observers = [
       () => persistence.savePostsPerPage(this.settingsResultTable.get('postsPerPage')),
