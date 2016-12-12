@@ -1,11 +1,14 @@
 // @flow
 
 import React from 'react';
+
+/** Components */
 import { 
   ButtonGroup as BootstrapButtonGroup, 
   Button 
 } from 'react-bootstrap';
 
+/** Types */
 type Props = {
   values: number[],
   activeValue: number,
@@ -13,6 +16,9 @@ type Props = {
   className?: string
 };
 
+/**
+ * ButtonGroup component
+ */
 function ButtonGroup({ values, activeValue, onSelect, className}: Props){
 
   const buttons = values.map((value, idx) => (

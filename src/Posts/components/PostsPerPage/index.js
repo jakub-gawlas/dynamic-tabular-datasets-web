@@ -12,6 +12,7 @@ import ButtonGroup from './ButtonGroup';
 /** Styles */
 import styles from './styles.css';
 
+/** Types */
 type Props = {
   className?: string 
 };
@@ -19,6 +20,9 @@ type Props = {
 /** Available values of number items per page  */
 const ITEMS_PER_PAGE = [5, 10, 15, 20];
 
+/** 
+ * PostsPerPage component
+ */
 @observer
 class PostsPerPage extends Component {
   props: Props
