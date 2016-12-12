@@ -22,11 +22,17 @@ export type Header = {
 
 export type OnClickSort = (name: string, type: 'asc' | 'desc') => void;
 
+export type ActiveSort = {
+  name: string,
+  type: 'asc' | 'desc'
+}
+
 type Props = {
   headers: Header[],
   rows: Row[],
+  activeSort?: ActiveSort,
   onClickSort: OnClickSort,
-  shouldHighlightRow: (row: Row) => boolean
+  shouldHighlightRow: (row: Row) => boolean,
 };
 
 /** 
@@ -38,19 +44,34 @@ class Table extends Component {
   static defaultProps = {
     shouldHighlightRow: () => false
   }
+
+  isActiveSort = ({ name, type }: ActiveSort) => {
+    const { activeSort } = this.props;
+    if(!activeSort) return false;
+    const result = (name === activeSort.name) && (type === activeSort.type);
+    console.log(1, activeSort.name, result);
+    return result;
+  }
  
   renderHeaders = () => {
     const { headers, onClickSort } = this.props;
+    const ACTIVE_SORT_CLASSNAME = styles['header__sort__button--active']; 
     return(
       <tr>
       {headers.map(({ name, label }, idx) => (
         <th className={styles['text-center']} key={idx}>
           {label}
           <ButtonGroup bsSize="xsmall" className={styles.header__sort__container}>
-            <Button onClick={() => onClickSort(name, 'asc')}>
+            <Button 
+              className={this.isActiveSort({ name, type: 'asc' }) && ACTIVE_SORT_CLASSNAME} 
+              onClick={() => onClickSort(name, 'asc')}
+            >
               ↑
             </Button>
-            <Button onClick={() => onClickSort(name, 'desc')}>
+            <Button
+              className={this.isActiveSort({ name, type: 'desc' }) && ACTIVE_SORT_CLASSNAME} 
+              onClick={() => onClickSort(name, 'desc')}
+            >
               ↓
             </Button>
           </ButtonGroup>

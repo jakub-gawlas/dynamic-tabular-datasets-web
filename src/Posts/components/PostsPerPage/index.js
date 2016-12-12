@@ -30,7 +30,7 @@ class PostsPerPage extends Component {
   render(){
     const { className } = this.props;
     const {
-      settingsResultTable,
+      postsPerPage,
       setPostsPerPage
     } = PostsStore;
 
@@ -41,7 +41,7 @@ class PostsPerPage extends Component {
         </span>
         <ButtonGroup 
           values={ITEMS_PER_PAGE}
-          activeValue={settingsResultTable.get('postsPerPage')}
+          activeValue={postsPerPage}
           onSelect={setPostsPerPage}
         />
       </div>

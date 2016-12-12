@@ -1,7 +1,14 @@
+/* Header */
 .header__sort__container {
   padding: 1rem;
 }
 
+.header__sort__button--active {
+  background: #e6e6e6;
+  border-color: #adadad;
+}
+
+/* Row */
 .row__td {
   text-align: center;
 }

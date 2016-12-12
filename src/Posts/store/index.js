@@ -94,6 +94,19 @@ class PostsStore {
    * Settings result table
    */
 
+  @computed
+  get sort(): Sort {
+    return this.settingsResultTable.get('sort');
+  }
+
+  get filter(): Filter {
+    return this.settingsResultTable.get('filter');
+  }
+
+  get postsPerPage(): number {
+    return this.settingsResultTable.get('postsPerPage');
+  }
+
   @action
   setPostsPerPage = (value: number) => {
     this.currentPage = 1;
@@ -101,12 +114,12 @@ class PostsStore {
   }
 
   @action
-  setResultTableFilter = (filter: Filter) => {
+  setFilter = (filter: Filter) => {
     this.settingsResultTable.set('filter', filter);
   }
 
   @action
-  setResultTableSort = ( sort: Sort) => {
+  setSort = ( sort: Sort) => {
     this.settingsResultTable.set('sort', sort);
   }
 
@@ -121,7 +134,7 @@ class PostsStore {
     postsPerPage && this.setPostsPerPage(postsPerPage);
 
     const sort = persistence.getSort();
-    sort && this.setResultTableSort(sort);
+    sort && this.setSort(sort);
   }
 
   /** Automatically save data on local storage */

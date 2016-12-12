@@ -24,8 +24,8 @@ class Filter extends Component {
 
   getFormFileds(): Field[]{
     const { 
-      settingsResultTable, 
-      setResultTableFilter 
+      filter, 
+      setFilter 
     } = PostsStore;
     
     return [
@@ -34,8 +34,8 @@ class Filter extends Component {
         type: 'text',
         label: 'Author',
         placeholder: 'Filter by author',
-        value: settingsResultTable.get('filter').username,
-        onChange: (value) => setResultTableFilter({ username: value })
+        value: filter.username,
+        onChange: (value) => setFilter({ username: value })
       }
     ];
   }

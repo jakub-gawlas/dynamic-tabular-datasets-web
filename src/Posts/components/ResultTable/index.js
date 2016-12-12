@@ -59,7 +59,8 @@ class ResultTable extends Component {
       numberOfPages,
       currentPage,
       setCurrentPage,
-      setResultTableSort
+      setSort,
+      sort
     } = PostsStore;
 
     return (
@@ -67,7 +68,8 @@ class ResultTable extends Component {
         <Table 
           headers={TABLE_HEADERS}
           rows={resultPosts}
-          onClickSort={(by, type) => setResultTableSort({ by, type })}
+          activeSort={{ name: sort.by, type: sort.type }}
+          onClickSort={(by, type) => setSort({ by, type })}
           shouldHighlightRow={(row) => row ? row.username  === CommonsStore.username : false}
         />
         <Pager 
