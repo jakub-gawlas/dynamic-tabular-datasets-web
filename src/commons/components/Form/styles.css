@@ -1,9 +1,0 @@
-.field__container {
-  display: flex;
-  align-items: center; 
-  padding: 1rem;
-}
-
-.field__input {
-  margin-left: 1rem;
-}
