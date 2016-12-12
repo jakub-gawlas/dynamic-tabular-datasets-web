@@ -6,6 +6,7 @@ import { observer } from 'mobx-react';
 
 /** Stores */
 import PostsStore from '../../store';
+import CommonsStore from '../../../Commons/store';
 
 /** Components */
 import Table from '../../../Commons/components/Table';
@@ -67,6 +68,7 @@ class ResultTable extends Component {
           headers={TABLE_HEADERS}
           rows={resultPosts}
           onClickSort={(by, type) => setResultTableSort({ by, type })}
+          shouldHighlightRow={(row) => row ? row.username  === CommonsStore.username : false}
         />
         <Pager 
           title="Page"

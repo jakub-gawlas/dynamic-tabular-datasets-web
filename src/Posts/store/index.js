@@ -9,6 +9,7 @@ import {
   autorun 
 } from 'mobx';
 
+/** Helpers */
 import { filterPosts, sortPosts } from './helpers';
 import * as api from '../services/api';
 import * as persistence from '../services/persistence';
@@ -18,12 +19,15 @@ import * as persistence from '../services/persistence';
  */
 class PostsStore {
 
+  /** All posts */
   @observable
   posts: Post[] = []
 
+  /** Current number of displayed page of posts */
   @observable
   currentPage: number = 1
 
+  /** Properties dataset of posts */
   @observable
   settingsResultTable = asMap({
     postsPerPage: 5,
