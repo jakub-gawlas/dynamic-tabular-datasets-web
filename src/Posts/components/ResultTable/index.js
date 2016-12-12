@@ -1,18 +1,14 @@
 // @flow
-import type { Post } from '../../typedefs';
-import type { Header, OnClickSort } from '../../../commons/components/Table';
+import type { Header } from '../../../commons/components/Table';
 
-import React from 'react';
-import { Pagination } from 'react-bootstrap';
+import React, { Component } from 'react';
+import { observer } from 'mobx-react';
+import PostsStore from '../../store';
 import Table from '../../../commons/components/Table';
-import styles from './styles.css';
+import Pager from './Pager';
 
 type Props = {
-  posts: Post[],
-  numberOfPages: number,
-  currentPage: number,
-  onSelectPage: (number) => void,
-  onClickSort: OnClickSort
+  className?: string
 };
 
 const TABLE_HEADERS: Header[] = [
@@ -42,29 +38,36 @@ const TABLE_HEADERS: Header[] = [
   }
 ];
 
-function ResultTable({ posts, numberOfPages, currentPage, onSelectPage, onClickSort, itemsPerPage, onSelectItemsPerPage }: Props){
-  return (
-    <div>
-      <Table 
-        headers={TABLE_HEADERS}
-        rows={posts}
-        onClickSort={onClickSort}
-      />
-      {numberOfPages > 0 &&
-        <div className={styles.pagination__container}>
-          <span className={styles.pagination__title}>
-            Page
-          </span>
-          <Pagination 
-              bsSize="medium"
-              items={numberOfPages}
-              activePage={currentPage}
-              onSelect={onSelectPage}
-          />
-        </div>
-      }
-    </div>
-  );
+@observer
+class ResultTable extends Component {
+  props: Props
+
+  render(){
+    const { className } = this.props;
+    const {
+      resultPosts,
+      numberOfPages,
+      currentPage,
+      setCurrentPage,
+      setResultTableSort
+    } = PostsStore;
+
+    return (
+      <div className={className}>
+        <Table 
+          headers={TABLE_HEADERS}
+          rows={resultPosts}
+          onClickSort={(by, type) => setResultTableSort({ by, type })}
+        />
+        <Pager 
+          title="Page"
+          numberOfPages={numberOfPages}
+          currentPage={currentPage}
+          onSelect={setCurrentPage} 
+        />
+      </div>
+    );
+  }
 }
 
 export default ResultTable;

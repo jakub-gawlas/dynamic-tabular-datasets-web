@@ -1,13 +1,13 @@
 // @flow
-import type { NewPost } from '../../typedefs';
 import type { Field } from '../../../commons/components/Form'; 
 
 import React from 'react';
+import PostsStore from '../../store';
 import Form from '../../../commons/components/Form';
 import styles from './styles.css';
 
 type Props = {
-  onSubmit: (newPost: NewPost) => void
+  className?: string
 };
 
 const FORM_FIELDS: Field[] = [
@@ -25,13 +25,13 @@ const FORM_FIELDS: Field[] = [
   }
 ];
 
-function NewPostForm({ onSubmit }: Props){
+function NewPostForm({ className }: Props){
   return(
     <Form 
       textSubmitButton="Add post"
       fields={FORM_FIELDS}
-      onSubmit={onSubmit}
-      className={styles.container}
+      onSubmit={PostsStore.addPost}
+      className={[styles.container, className].join(' ')}
     />
   );
 }

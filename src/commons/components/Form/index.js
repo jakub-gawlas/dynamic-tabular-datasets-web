@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import { 
-  Form,
+  Form as BootstrapForm,
   FormGroup,
   ControlLabel,
   FormControl,
@@ -27,7 +27,7 @@ type Props = {
   className?: string
 };
 
-class GenericForm extends Component {
+class Form extends Component {
   props: Props
 
   static defaultProps = {
@@ -87,12 +87,12 @@ class GenericForm extends Component {
   render(){
     const { fields, hideSubmitButton, className } = this.props;
     return(
-      <Form inline className={className}>
+      <BootstrapForm inline className={className}>
         {fields.map(this.renderField)}
         {!hideSubmitButton && this.renderSubmitButton()}
-      </Form>
+      </BootstrapForm>
     );
   }
 }
 
-export default GenericForm;
+export default Form;

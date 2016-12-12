@@ -90,10 +90,11 @@ class PostsStore {
   }
 
   enablePersistence = () => {
-    autorun(() => {
-      persistence.savePostsPerPage(this.settingsResultTable.get('postsPerPage'));
-      persistence.saveSort(this.settingsResultTable.get('sort'));
-    });
+    const observers = [
+      () => persistence.savePostsPerPage(this.settingsResultTable.get('postsPerPage')),
+      () => persistence.saveSort(this.settingsResultTable.get('sort'))
+    ];
+    observers.forEach((observer) => autorun(observer));
   }
 
 }

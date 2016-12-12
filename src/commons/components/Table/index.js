@@ -4,11 +4,11 @@ import React from 'react';
 import {
   ButtonGroup,
   Button, 
-  Table
+  Table as BootstrapTable
 } from 'react-bootstrap';
 import styles from './styles.css';
 
-type Row = any;
+export type Row = any;
 
 export type Header = {
   name: string,
@@ -65,22 +65,23 @@ function renderInfoNoItems(){
   );
 }
 
-function GenericTable({headers, rows, onClickSort}: Props){
+function Table({headers, rows, onClickSort}: Props){
   return(
-    <Table striped bordered condensed>
+    <BootstrapTable striped bordered condensed>
       <thead>
         {renderHeaders(headers, onClickSort)}
       </thead>
       <tbody>
-        {
-          rows.length > 0 ?
+        { 
+          rows.length > 0 ? (
             rows.map((row, idx) => renderRow(row, headers, idx))
-          :
+          ) : (
             renderInfoNoItems()
+          )
         }
       </tbody>
-    </Table>
+    </BootstrapTable>
   );
 }
 
-export default GenericTable;
+export default Table;
