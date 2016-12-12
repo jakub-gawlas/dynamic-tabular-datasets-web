@@ -8,7 +8,7 @@ export const POSTS: Post[] = [
     title: 'My new cat',
     views: 1120,
     likes: 52,
-    createdAt: '2014-09-20'
+    createdAt: '2014-09-20T00:00:00+02:00'
   },
   {
     id: 1,
@@ -16,7 +16,7 @@ export const POSTS: Post[] = [
     title: 'Rock and roll!',
     views: 5400,
     likes: 367,
-    createdAt: '2014-09-23'
+    createdAt: '2014-09-23T00:00:00+02:00'
   },
   {
     id: 2,
@@ -24,7 +24,7 @@ export const POSTS: Post[] = [
     title: 'Oh no...',
     views: 500,
     likes: 30,
-    createdAt: '2014-10-10'
+    createdAt: '2014-10-10T00:00:00+02:00'
   },
   {
     id: 3,
@@ -32,7 +32,7 @@ export const POSTS: Post[] = [
     title: 'VanillaJS 4ever!',
     views: 50,
     likes: 3,
-    createdAt: '2014-10-20'
+    createdAt: '2014-10-20T00:00:00+02:00'
   },
   {
     id: 4,
@@ -40,7 +40,7 @@ export const POSTS: Post[] = [
     title: 'Nice one man',
     views: 1090,
     likes: 367,
-    createdAt: '2014-12-01'
+    createdAt: '2014-12-01T00:00:00+02:00'
   },
   {
     id: 5,
@@ -48,6 +48,6 @@ export const POSTS: Post[] = [
     title: 'Ouuh yeah!',
     views: 1690,
     likes: 309,
-    createdAt: '2014-12-10'
+    createdAt: '2015-02-20T00:00:00+02:00'
   }
 ];

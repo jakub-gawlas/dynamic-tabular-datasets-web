@@ -48,9 +48,7 @@ class Table extends Component {
   isActiveSort = ({ name, type }: ActiveSort) => {
     const { activeSort } = this.props;
     if(!activeSort) return false;
-    const result = (name === activeSort.name) && (type === activeSort.type);
-    console.log(1, activeSort.name, result);
-    return result;
+    return (name === activeSort.name) && (type === activeSort.type);
   }
  
   renderHeaders = () => {

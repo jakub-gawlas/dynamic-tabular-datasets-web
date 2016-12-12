@@ -10,6 +10,7 @@ import {
 } from 'mobx';
 
 /** Helpers */
+import moment from 'moment';
 import { filterPosts, sortPosts } from './helpers';
 import * as api from '../services/api';
 import * as persistence from '../services/persistence';
@@ -61,11 +62,20 @@ class PostsStore {
 
   /** Posts after filter, sort and slice to proper subarray */
   @computed
-  get resultPosts(): Post[] {
+  get slicedPosts(): Post[] {
     const postsPerPage = this.settingsResultTable.get('postsPerPage');
     const startIndex = (this.currentPage - 1) * postsPerPage;
     const endIndex = startIndex + postsPerPage;
     return this.filteredAndSortedPosts.slice(startIndex, endIndex);
+  }
+
+  /** Posts after filter, sort, sliced and format (createdAt to format `YYYY-MM-DD`) */
+  @computed 
+  get resultPosts(): Post[] {
+    return this.slicedPosts.map((post) => ({
+      ...post,
+      createdAt: moment(post.createdAt).format('YYYY-MM-DD')
+    }));
   }
 
   /** Number subarray of sliced posts   */
